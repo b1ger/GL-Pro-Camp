@@ -12,6 +12,4 @@ public interface List<T> extends Iterable<T> {
 
     void remove(int index);
 
-    java.util.List some();
-
 }
