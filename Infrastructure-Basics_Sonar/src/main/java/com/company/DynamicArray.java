@@ -1,6 +1,8 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DynamicArray<T> implements List<T> {
 
@@ -37,7 +39,7 @@ public class DynamicArray<T> implements List<T> {
 
     private void ensureFit(int index) {
         if (index >= array.length) {
-            Integer[] newArray = new Integer[index + 1];
+            Object[] newArray = new Object[index + 1];
             System.arraycopy(array, 0, newArray, 0, (array.length));
             array = newArray;
         }
@@ -45,7 +47,7 @@ public class DynamicArray<T> implements List<T> {
 
     @Override
     public int size() {
-        return ++lastIndex;
+        return lastIndex + 1;
     }
 
     public void remove(int index) {
@@ -55,12 +57,13 @@ public class DynamicArray<T> implements List<T> {
             array[i] = array[i + 1];
         }
         array[lastIndex] = null;
-        lastIndex--;
+        lastIndex = lastIndex - 1;
+        trimToSize();
     }
 
     public void trimToSize() {
         Object[] newArray = new Object[size()];
-        for (int i = 0; i <= lastIndex; i++) {
+        for (int i = 0; i < lastIndex; i++) {
             newArray[i] = array[i];
         }
         array = newArray;
@@ -84,9 +87,16 @@ public class DynamicArray<T> implements List<T> {
             @SuppressWarnings("unchecked")
             @Override
             public T next() {
-                return (T)array[++pos];
+                if (hasNext()) {
+                    return (T)array[++pos];
+                }
+                throw new NoSuchElementException();
             }
         };
     }
 
+    @Override
+    public String toString() {
+        return "DynamicArray :: " + Arrays.toString(array);
+    }
 }
