@@ -45,7 +45,7 @@ public class DynamicArray<T> implements List<T> {
 
     @Override
     public int size() {
-        return ++lastIndex;
+        return lastIndex + 1;
     }
 
     public void remove(int index) {
