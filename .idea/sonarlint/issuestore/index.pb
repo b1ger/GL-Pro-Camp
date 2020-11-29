@@ -17,3 +17,11 @@ GInfrastructure-Basics_Sonar/src/main/java/com/company/DynamicArray.java,b/4/b4
 KInfrastructure-Basics_Sonar/src/test/java/com/company/DynamicArrayTest.java,7/5/7564a1b918a9d29238de963303c8ae998e913a96
 ]
 -Modern-Java/src/com/company/DynamicArray.java,8/f/8fd6cc18df6c96afde74d7c66f0b14bf1e15c7f4
+7
+pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
+Z
+*src/main/java/com/company/domain/User.java,8/a/8a93cbbc3bb7769857b002bd16f62ec27728f983
+R
+"src/main/java/com/company/App.java,b/b/bb14417d0f29adfad10152323b3463014332de63
+e
+5src/main/java/com/company/config/HibernateConfig.java,1/1/11b6d35f95e6d1506152bc3ac3384d9045b12ddc
