@@ -17,15 +17,6 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        int[] arr1 = {1, 4, 7, 8, 25};
-        int[] arr2 = {3, 4, 9, 10, 21};
 
-        for (int i = 0; i < arr1.length; i++) {
-            add(arr1[i], arr2[i]);
-        }
-    }
-
-    public void add(int a, int b) {
-        System.out.println(a + b);
     }
 }

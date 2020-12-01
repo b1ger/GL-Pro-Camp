@@ -2,8 +2,6 @@ package com.company.service;
 
 import com.company.domain.Activity;
 import com.company.domain.Building;
-import com.company.domain.Report;
-import com.company.domain.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,7 +30,7 @@ public class BuildingService extends CommonCrudService {
             Query query = session.createQuery(hqlQuery);
             query.setParameter("id", id);
             transaction.commit();
-            return  query.list().size() > 0 ? Optional.of((User)query.list().get(0)): Optional.empty();
+            return  query.list().size() > 0 ? Optional.of((Building)query.list().get(0)): Optional.empty();
         } catch (HibernateException ex) {
             transaction.rollback();
             logger.error("Unexpected error.", ex);

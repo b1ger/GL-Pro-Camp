@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "")
+@ToString
 public class Activity {
 
     @Id

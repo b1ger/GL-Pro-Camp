@@ -1,8 +1,11 @@
 package com.company;
 
 import com.company.config.HibernateConfig;
+import com.company.domain.Activity;
+import com.company.domain.Building;
 import com.company.domain.Report;
 import com.company.domain.User;
+import com.company.service.ActivityService;
 import com.company.service.BuildingService;
 import com.company.service.ReportService;
 import com.company.service.UserService;
@@ -30,6 +33,7 @@ public class App
         UserService userService = new UserService(factory);
         ReportService reportService = new ReportService(factory);
         BuildingService buildingService = new BuildingService(factory);
+        ActivityService activityService = new ActivityService(factory);
 
         Optional<User> userOptional = userService.findOne(1l);
         User user = userOptional.get();
@@ -40,11 +44,17 @@ public class App
         System.out.println(reports);
 
         // Get All activities information for Particular user and Specified building
-        // TODO
+        Optional<Building> buildingOptional = buildingService.findOne(2l);
+        Building building = buildingOptional.get();
+        List<Activity> activities = activityService.findAllByUserAndBuilding(user, building);
+        System.out.println(activities);
 
         // Set Buildings in non-Active state where total price of all activities is more than specified value
         boolean result = buildingService.disActiveIfPriceLessThan(1000000);
         System.out.println(result);
+
+        // Get total Activities price for particular building/report/user.
+        System.out.println(activityService.getTotalPriceByUserAndBuildingAndReport(user, building, reports.get(0)));
 
         factory.close();
     }

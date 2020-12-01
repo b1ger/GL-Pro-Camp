@@ -15,8 +15,6 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class FillDatabaseUtilImpl implements FillDatabaseUtil {

@@ -31,7 +31,7 @@ public class MaterialService extends CommonCrudService {
             return  query.list().size() > 0 ? Optional.of((User)query.list().get(0)): Optional.empty();
         } catch (HibernateException ex) {
             transaction.rollback();
-            logger.error("Unexpected error.", ex);
+            logger.error("Unexpected exception.", ex);
             return Optional.empty();
         } finally {
             session.close();
@@ -49,7 +49,7 @@ public class MaterialService extends CommonCrudService {
             return  query.list();
         } catch (HibernateException ex) {
             transaction.rollback();
-            logger.error("Unexpected error.", ex);
+            logger.error("Unexpected exception.", ex);
             return Collections.emptyList();
         } finally {
             session.close();

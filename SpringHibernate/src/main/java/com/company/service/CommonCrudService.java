@@ -28,7 +28,7 @@ public abstract class CommonCrudService implements CrudService {
             return true;
         } catch (HibernateException ex) {
             transaction.rollback();
-            logger.error("Unexpected error.", ex);
+            logger.error("Unexpected exception.", ex);
             return false;
         } finally {
             session.close();
@@ -44,7 +44,7 @@ public abstract class CommonCrudService implements CrudService {
             return true;
         } catch (HibernateException ex) {
             transaction.rollback();
-            logger.error("Unexpected error.", ex);
+            logger.error("Unexpected exception.", ex);
             return false;
         } finally {
             session.close();
