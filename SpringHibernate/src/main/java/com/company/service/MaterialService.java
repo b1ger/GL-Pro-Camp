@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.domain.Material;
 import com.company.domain.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -28,7 +29,7 @@ public class MaterialService extends CommonCrudService {
             Query query = session.createSQLQuery(sqlQuery);
             query.setParameter("id", id);
             transaction.commit();
-            return  query.list().size() > 0 ? Optional.of((User)query.list().get(0)): Optional.empty();
+            return  query.list().size() > 0 ? Optional.of(query.list().get(0)): Optional.empty();
         } catch (HibernateException ex) {
             transaction.rollback();
             logger.error("Unexpected exception.", ex);

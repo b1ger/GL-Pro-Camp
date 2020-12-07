@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.domain.Material;
 import com.company.domain.Report;
 import com.company.domain.User;
 import org.hibernate.Criteria;
@@ -23,14 +24,14 @@ public class ReportService extends CommonCrudService {
     }
 
     @Override
-    public Optional findOne(long id) {
+    public Optional<Report> findOne(long id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
             String hqlQuery = "FROM reports where id = :id";
             Query query = session.createQuery(hqlQuery);
             query.setParameter("id", id);
-            return  query.list().size() > 0 ? Optional.of((User)query.list().get(0)): Optional.empty();
+            return  query.list().size() > 0 ? Optional.of((Report)query.list().get(0)): Optional.empty();
         } catch (HibernateException ex) {
             transaction.rollback();
             logger.error("Unexpected exception.", ex);
@@ -41,7 +42,7 @@ public class ReportService extends CommonCrudService {
     }
 
     @Override
-    public List findAll() {
+    public List<Report> findAll() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -57,15 +58,15 @@ public class ReportService extends CommonCrudService {
         }
     }
 
-    public List findAllByUser(User user) {
+    public List<Report> findAllByUser(User user) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
             Criteria criteria = session.createCriteria(Report.class);
             criteria.add(Restrictions.eq("user", user));
-            List users = criteria.list();
+            List<Report> reports = criteria.list();
             transaction.commit();
-            return users;
+            return reports;
         } catch (HibernateException ex) {
             transaction.rollback();
             logger.error("Unexpected exception.", ex);

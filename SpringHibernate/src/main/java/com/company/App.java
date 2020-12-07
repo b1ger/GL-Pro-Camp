@@ -11,6 +11,8 @@ import com.company.service.ReportService;
 import com.company.service.UserService;
 import com.company.util.FillDatabaseUtil;
 import com.company.util.FillDatabaseUtilImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -18,12 +20,13 @@ import java.util.Optional;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+public class App {
+
+    private static final Logger logger = LogManager.getLogger(App.class);
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
 
         SessionFactory factory = HibernateConfig.getSessionFactory();
 
@@ -38,10 +41,12 @@ public class App
         Optional<User> userOptional = userService.findOne(1l);
         User user = userOptional.get();
         System.out.println(user);
+        logger.debug(user.toString());
 
         // Get all Reports information for particular user
         List<Report> reports = reportService.findAllByUser(user);
         System.out.println(reports);
+        logger.debug(reports.toString());
 
         // Get All activities information for Particular user and Specified building
         Optional<Building> buildingOptional = buildingService.findOne(2l);
@@ -52,9 +57,12 @@ public class App
         // Set Buildings in non-Active state where total price of all activities is more than specified value
         boolean result = buildingService.disActiveIfPriceLessThan(1000000);
         System.out.println(result);
+        logger.debug(result);
 
         // Get total Activities price for particular building/report/user.
-        System.out.println(activityService.getTotalPriceByUserAndBuildingAndReport(user, building, reports.get(0)));
+        Double total = activityService.getTotalPriceByUserAndBuildingAndReport(user, building, reports.get(0));
+        System.out.println(total);
+        logger.debug(total);
 
         factory.close();
     }

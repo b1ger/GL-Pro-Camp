@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.domain.Activity;
 import com.company.domain.Building;
 import com.company.domain.Report;
 import com.company.domain.User;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,14 +24,15 @@ public class ActivityService extends CommonCrudService {
     }
 
     @Override
-    public Optional findOne(long id) {
+    public Optional<Activity> findOne(long id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            String sqlQuery = "SELECT * FROM activities where id = :id";
+            String sqlQuery = "SELECT * FROM activities WHERE id = :id";
             Query query = session.createSQLQuery(sqlQuery);
             query.setParameter("id", id);
-            Optional optional =  query.list().size() > 0 ? Optional.of((User)query.list().get(0)): Optional.empty();
+            query.setResultTransformer(Transformers.aliasToBean(Activity.class));
+            Optional optional =  query.getResultList().size() > 0 ? Optional.of(query.getResultList().get(0)): Optional.empty();
             transaction.commit();
             return optional;
         } catch (HibernateException ex) {

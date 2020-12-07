@@ -6,6 +6,8 @@ import com.company.domain.Material;
 import com.company.domain.Report;
 import com.company.domain.User;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -14,6 +16,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class HibernateConfig {
+
+    private static final Logger logger = LogManager.getLogger(HibernateConfig.class);
 
     public static SessionFactory sessionFactory;
 
@@ -39,7 +43,7 @@ public class HibernateConfig {
                                 .addAnnotatedClass(Material.class)
                                 .buildSessionFactory();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Unexpected exception.", e);
         }
     }
 }

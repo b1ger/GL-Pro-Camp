@@ -9,5 +9,7 @@
         <Root level="error">
             <AppenderRef ref="FileSystem"/>
         </Root>
+        <Logger name="com.company.App" level="debug"/>
+        <Logger name="com.company.util.FillDatabaseUtilImpl" level="debug"/>
     </Loggers>
 </Configuration>
